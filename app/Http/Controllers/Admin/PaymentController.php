@@ -47,7 +47,8 @@ class PaymentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $payment = Payment::find($id);
+        return view('admin.payments.edit',compact('payment'));
     }
 
     /**
@@ -55,8 +56,27 @@ class PaymentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //dd($request);
+        $payment = Payment::find($id);
+        $payment->update($request->all());
+
+        if($request->hasFile('logo')){
+
+          //file upload
+        $file_name = time().'.'.$request->logo->extension(); //2345234234.jpg
+
+        $upload = $request->logo->move(public_path('images/payments/'), $file_name); //folder ထဲကို upload 
+        if ($upload){
+            $payment->logo = "/images/payments/".$file_name;
+        }
+
+        }else{
+            $payment->logo = $request->old_logo;
+        }
+        $payment->save();
+        return redirect()->route('admin.payments.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.

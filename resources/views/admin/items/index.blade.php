@@ -5,7 +5,7 @@
                     <div class="container-fluid px-4">
                         <div class="my-3">
                             <h1 class="mt-4 d-inline">Items</h1>
-                            <a href="#" class="btn btn-primary float-end">Create Item</a>
+                            <a href="{{route('admin.items.create')}}" class="btn btn-primary float-end">Create Item</a>
                         </div>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
@@ -27,6 +27,7 @@
                                             <th>Price</th>
                                             <th>Instock</th>
                                             <th>Category</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -37,6 +38,8 @@
                                             <th>Price</th>
                                             <th>Instock</th>
                                             <th>Category</th>
+                                            <th>Action</th>
+
                                         </tr>
                                     </tfoot>
                                 
@@ -53,6 +56,10 @@
                                             <td>{{$item->price}}</td>
                                             <td>{{$item->in_stock}}</td>
                                             <td>{{$item->category->name}}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-danger dalete" data-id="{{$item->id}}">Delete</a>
+                                                <a href="{{route('admin.items.edit', $item->id)}}" class="btn btn-sm btn-warning">Edit</a>
+                                            </td>
                                         </tr>
 
                                         @endforeach
@@ -63,5 +70,32 @@
                         </div>
                     </div>
                 </main>
+
+         <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header bg-danger text-light">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete...</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1>Are you sure delete?</h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+        $('tbody').on('click','.delete',function(){
+            $('#deleteModal').modal('show');
+       })
+    })
+</script>
 
 @endsection

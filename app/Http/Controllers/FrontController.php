@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Payment;
 class FrontController extends Controller
 {
     public function index(){
@@ -23,5 +24,10 @@ class FrontController extends Controller
     public function itemCategory($category_id){
         $items = Item::where('category_id', $category_id)->orderBy('id', 'DESC')->paginate(8);
         return view('front.item-category', compact('items'));
+    }
+
+    public function cart(){
+        $payments = Payment::all();
+        return view('front.cart', compact('payments'));
     }
 }

@@ -48,7 +48,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -56,7 +57,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         //dd($request);
+        $category = Category::find($id);
+        $category->update($request->all());
+
+        
+        return redirect()->route('admin.categories.index');
     }
 
     /**

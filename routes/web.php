@@ -7,6 +7,7 @@ Route::get('shop-item/{id}', [App\Http\Controllers\FrontController::class, 'shop
 
 Route::get('items-category/{category_id}', [App\Http\Controllers\FrontController::class, 'itemCategory'])->name('items.category');
 
+Route::get('item-carts', [App\Http\Controllers\FrontController::class, 'cart'])->name('items.cart');
 // Route::get('/admin', [App\Http\Controllers\DashboardController::class, 'index'])->name('admin.index');
 
 //Route Group
