@@ -5,7 +5,7 @@
                     <div class="container-fluid px-4">
                         <div class="my-3">
                             <h1 class="mt-4 d-inline">Categories</h1>
-                            <a href="#" class="btn btn-primary float-end">Create Category</a>
+                            <a href="{{route('admin.categories.create')}}" class="btn btn-primary float-end">Create Category</a>
                         </div>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
@@ -82,7 +82,13 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+
+            <form action="" method="post" id="deleteForm">
+                @csrf 
+                @method('delete')
+            <button type="submit" class="btn btn-danger">Yes</button>
+            </form>
+
         </div>
         </div>
     </div>
@@ -91,6 +97,10 @@
     <script>
     $(document).ready(function(){
         $('tbody').on('click','.delete',function(){
+
+            let id = $(this).data('id');
+            $('#deleteForm').attr('action', `categories/${id}`);
+
             $('#deleteModal').modal('show');
        })
     })

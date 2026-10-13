@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -32,7 +32,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->all());
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -70,6 +71,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd($id);
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('admin.categories.index');
     }
 }

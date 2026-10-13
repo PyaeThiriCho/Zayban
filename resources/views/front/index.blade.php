@@ -44,7 +44,7 @@
                                     </div>
 
                                      <div class="col-md-8">
-                                    <button class="btn btn-sm btn-dark">Add to cart</button>
+                                    <button class="btn btn-sm btn-dark addToCart" data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}" data-discount="{{$item->discount}}" data-image="{{$item->image}}">Add to cart</button>
                                 </div>
                                 </div>
 

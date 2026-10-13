@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -32,7 +32,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'profile' => 'image.jpg',
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'role' => $request->role,
+    ]);
+
+    return redirect()->route('admin.users.index');
     }
 
     /**
@@ -71,6 +80,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd($id);
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }

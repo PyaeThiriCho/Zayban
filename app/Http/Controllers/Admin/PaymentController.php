@@ -23,7 +23,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.payments.create');
     }
 
     /**
@@ -31,7 +31,22 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payment = Payment::create($request->all());
+
+        $file_name = time().'.'.$request->logo->extension();
+
+        $upload = $request->logo->move(
+            public_path('images/payments/'),
+            $file_name
+        );
+
+        if($upload){
+            $payment->logo = "/images/payments/".$file_name;
+        }
+
+        $payment->save();
+
+        return redirect()->route('admin.payments.index');
     }
 
     /**
@@ -83,6 +98,9 @@ class PaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd($id);
+        $payment = Payment::find($id);
+        $payment->delete();
+        return redirect()->route('admin.payments.index');
     }
 }

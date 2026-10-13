@@ -57,7 +57,7 @@
                                             <td>{{$item->in_stock}}</td>
                                             <td>{{$item->category->name}}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-danger dalete" data-id="{{$item->id}}">Delete</a>
+                                                <a class="btn btn-sm btn-danger delete" data-id="{{$item->id}}">Delete</a>
                                                 <a href="{{route('admin.items.edit', $item->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                             </td>
                                         </tr>
@@ -84,7 +84,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+
+                <form action="" method="post" id="deleteForm">
+                    @csrf 
+                    @method('delete')
+                <button type="submit" class="btn btn-danger">Yes</button>
+                </form>
+
             </div>
             </div>
         </div>
@@ -93,6 +99,10 @@
     <script>
     $(document).ready(function(){
         $('tbody').on('click','.delete',function(){
+
+            let id = $(this).data('id');
+            $('#deleteForm').attr('action', `items/${id}`);
+
             $('#deleteModal').modal('show');
        })
     })

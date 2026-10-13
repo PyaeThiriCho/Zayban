@@ -28,7 +28,15 @@ class LoginController extends Controller
      */
     // protected $redirectTo = '/home';
 
-    public function $redirectTo
+    public function redirectTo(){
+        $role = strtolower(Auth::user()->role);
+
+        if(in_array($role,['admin','staff'])){
+            return '/admin';
+        }
+        return '/';
+
+    }
 
     /**
      * Create a new controller instance.
