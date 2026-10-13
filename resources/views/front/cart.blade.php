@@ -40,7 +40,22 @@
                     <label for="address">Address</label>
                     <textarea name="address" id="" class="form-control"></textarea>
                 </div>
-                <button class="btn btn-success my-3" id="order-now" type="submit">Order Now</button>
+
+                @guest
+
+                <a href="/login" class="btn btn-primary my-3">Login</a>
+
+                @else
+
+                @if(Auth::user()->role == 'user')
+
+                <button class="btn btn-success my-3" id="order-now" type="submit">
+                    Order Now
+                </button>
+
+                @endif
+
+                @endguest
             </form>
     </div>
 </div>
