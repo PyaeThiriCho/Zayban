@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -30,18 +32,27 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+        public function store(UserRequest $request)
     {
-        User::create([
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'profile' => 'image.jpg',
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'role' => $request->role,
-    ]);
+        $file_name = time().'.'.$request->profile->extension();
 
-    return redirect()->route('admin.users.index');
+        $upload = $request->profile->move(
+            public_path('images/users/'),
+            $file_name
+        );
+
+        $profile = "/images/users/".$file_name;
+
+        $users = User::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'profile' => $profile,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -65,16 +76,38 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+        public function update(Request $request, string $id)
     {
-        //dd($request);
         $user = User::find($id);
-        $user->update($request->all());
 
-        
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->role = $request->role;
+
+        if($request->hasFile('profile')){
+            $file_name = time().'.'.$request->profile->extension();
+
+            $upload = $request->profile->move(
+                public_path('images/users/'),
+                $file_name
+            );
+
+            if($upload){
+                $user->profile = "/images/users/".$file_name;
+            }
+        }else{
+            $user->profile = $request->old_profile;
+        }
+
+        if($request->password){
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
         return redirect()->route('admin.users.index');
     }
-
     /**
      * Remove the specified resource from storage.
      */

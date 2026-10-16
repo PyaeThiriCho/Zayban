@@ -30,7 +30,21 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                      
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li>
+                    <a class="dropdown-item"
+                    href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+
+                    <form id="logout-form"
+                        action="{{ route('logout') }}"
+                        method="POST"
+                        class="d-none">
+                        @csrf
+                    </form>
+                </li>
                     </ul>
                 </li>
             </ul>
@@ -47,7 +61,7 @@
                             </a>
                    
                             <div class="sb-sidenav-menu-heading">Featuer</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{route('admin.orders')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Orders
                             </a>

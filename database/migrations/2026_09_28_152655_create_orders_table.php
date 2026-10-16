@@ -36,6 +36,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('payments')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -43,8 +43,8 @@
                             <label for="profile" class="col-md-4 col-form-label text-md-end">{{ __('Profile') }}</label>
 
                             <div class="col-md-6">
-                                <input id="profile" type="file" accept='images/*' class="form-control @error('profile') is-invalid @enderror" name="profile" value="{{ old('profile') }}" required autocomplete="profile" autofocus>
-
+                                <input id="profile" type="file" accept='image/*' class="form-control @error('profile') is-invalid @enderror" name="profile" required>
+ 
                                 @error('profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

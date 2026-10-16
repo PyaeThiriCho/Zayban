@@ -31,7 +31,7 @@
 
              <div class="mb-3">
                 <label for="phone" class="form-label">Phone</label>
-                <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{$user->phone}}">
+                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{$user->phone}}">
                 @error('phone')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -39,24 +39,51 @@
 
 
             <div class="mb-3">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="true">Profile</button>
+                        <button class="nav-link active"
+                                id="profile-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane"
+                                type="button"
+                                role="tab">
+                            Profile
+                        </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="new_image-tab" data-bs-toggle="tab" data-bs-target="#new_image-tab-pane" type="button" role="tab" aria-controls="new_image-tab-pane" aria-selected="false">New Profile</button>
+                        <button class="nav-link"
+                                id="new_profile-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#new_profile-tab-pane"
+                                type="button"
+                                role="tab">
+                            New Profile
+                        </button>
                     </li>
-                 </ul>
+                </ul>
+
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
-                        <img src="{{$user->image}}" alt="" class="w-25 h-25 my-3">
-                        <input type="hidden" name="old_image" id="" value="{{$user->image}}">
+                    <div class="tab-pane fade show active"
+                        id="profile-tab-pane"
+                        role="tabpanel">
+                        <img src="{{$user->profile}}" alt="" class="w-25 h-25 my-3">
+                        <input type="hidden"
+                            name="old_profile"
+                            value="{{$user->profile}}">
                     </div>
-                    <div class="tab-pane fade" id="new_image-tab-pane" role="tabpanel" aria-labelledby="new_image-tab" tabindex="0">
-                        <input type="file" accept="image/*" class="form-control my-3" name="image" id="image">
+                    <div class="tab-pane fade"
+                        id="new_profile-tab-pane"
+                        role="tabpanel">
+
+                        <input type="file"
+                            accept="image/*"
+                            class="form-control my-3"
+                            name="profile"
+                            id="profile">
                     </div>
                 </div>
             </div>
+
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -65,6 +92,17 @@
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">New Password</label>
+
+                <input type="password"
+                    class="form-control"
+                    name="password"
+                    id="password"
+                    autocomplete="new-password">
+            </div>
+
 
             <div class="mb-3">
                 <label for="role" class="form-label">Role</label>

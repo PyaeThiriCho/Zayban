@@ -44,6 +44,7 @@
                                     </div>
 
                                      <div class="col-md-8">
+                                    <input class="form-control text-center me-3 qty" id="inputQuantity" type="hidden" value="1" style="max-width: 3rem" />
                                     <button class="btn btn-sm btn-dark addToCart" data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}" data-discount="{{$item->discount}}" data-image="{{$item->image}}">Add to cart</button>
                                 </div>
                                 </div>

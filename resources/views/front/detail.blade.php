@@ -19,8 +19,8 @@
                         </div>
                         <p class="lead">{{$item->description}}</p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <input class="form-control text-center me-3 qty" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0 addToCart" type="button"  data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}" data-discount="{{$item->discount}}" data-image="{{$item->image}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>
@@ -65,7 +65,8 @@
                                     </div>
 
                                      <div class="col-md-8">
-                                    <button class="btn btn-sm btn-dark">Add to cart</button>
+                                    <input class="form-control text-center me-3 qty" id="inputQuantity" type="hidden" value="1" style="max-width: 3rem" />
+                                    <button class="btn btn-sm btn-dark addToCart"  data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}" data-discount="{{$item->discount}}" data-image="{{$item->image}}">Add to cart</button>
                                 </div>
                                 </div>
                                 

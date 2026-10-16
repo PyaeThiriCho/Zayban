@@ -76,7 +76,7 @@
                            class="form-control @error('email') is-invalid @enderror"
                            name="email"
                            id="email"
-                           value="{{old('email')}}">
+                           value="{{old('email')}}" autocomplete="off">
 
                     @error('email')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -90,7 +90,7 @@
                     <input type="password"
                            class="form-control @error('password') is-invalid @enderror"
                            name="password"
-                           id="password">
+                           id="password" autocomplete="new-password">
 
                     @error('password')
                         <div class="invalid-feedback">{{$message}}</div>
